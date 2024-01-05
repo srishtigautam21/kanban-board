@@ -3,15 +3,20 @@ import React, { useEffect, useRef } from "react";
 import "./Dropdown.css";
 
 function Dropdown(props) {
-  const dropdownRef = useRef();
+  //   const dropdownRef = useRef();
 
-  const handleClick = (event) => {
-    if (
-      dropdownRef &&
-      !dropdownRef.current?.contains(event.target) &&
-      props.onClose
-    )
-      props.onClose();
+  const handleClick = () => {
+    // dropdownRef,
+    // dropdownRef.current?.contains(event.target),
+    // dropdownRef.current,
+    // event.target
+    console.log(props.showDropdown);
+    // if (
+    //   dropdownRef &&
+    //   !dropdownRef.current?.contains(event.target) &&
+    //   props.onClose
+    // )
+    if (!props.showDropdown) props.onClose();
   };
 
   useEffect(() => {
@@ -24,7 +29,7 @@ function Dropdown(props) {
 
   return (
     <div
-      ref={dropdownRef}
+      //   ref={dropdownRef}
       className={`dropdown ${props.class ? props.class : ""}`}
     >
       {props.children}

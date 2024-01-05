@@ -41,3 +41,24 @@
   align-items: center;
   justify-content: space-between;
 }
+.type {
+  padding-top: 5px;
+}
+.card_header {
+  cursor: pointer;
+  position: relative;
+}
+.board_dropdown {
+  box-shadow: 1px 0px 20px rgba(0, 0, 0, 0.12);
+  padding: 10px;
+  width: 150px !important;
+  cursor: default;
+}
+.board_dropdown p {
+  /* border-bottom: 1px solid #f8f8f8; */
+  cursor: pointer;
+  padding: 5px;
+}
+.board_dropdown p:hover {
+  background-color: lightgray;
+}
