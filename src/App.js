@@ -111,7 +111,6 @@ function App() {
           ))}
         </div>
         {showModal && (
-          // <div className='Modal-wrapper'>
           <Modal>
             <div className='modal-header'>Add new Coloumn</div>
             <div className='modal-cross' onClick={() => setShowModal(false)}>
@@ -136,7 +135,6 @@ function App() {
               </button>
             </div>
           </Modal>
-          // </div>
         )}
       </div>
     </div>

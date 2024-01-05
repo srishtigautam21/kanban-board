@@ -14,7 +14,7 @@ const KanbanColumns = ({
   dragEnded,
 }) => {
   const [showDropdown, setShowDropdown] = useState(false);
-  console.log("hello", showDropdown);
+
   return (
     <div className='wrapper'>
       <div className='board_title'>

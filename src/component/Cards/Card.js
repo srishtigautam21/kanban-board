@@ -10,25 +10,12 @@ import {
 import Dropdown from "../Dropdown/Dropdown";
 
 const Card = ({ boardId, id, card, removeCard, dragEntered, dragEnded }) => {
-  // const handleAssigneeName = () => {
   const [showDropdown, setShowDropdown] = useState(false);
-  const [showModal, setShowModal] = useState(false);
-  //   console.log("here");
+
   let arr = card.assignee.split(" ");
   let nameAcronym = "";
   arr.forEach((name) => (nameAcronym += name[0].toUpperCase()));
 
-  // return nameAcronym;
-  // };
-  // const handlePriority = () => {
-  //   if (card.priority === "P0") {
-  //     return <ChevronUp color='red' size='20px' strokeWidth='2.5px' />;
-  //   } else if (card.priority === "P1") {
-  //     return <AlignJustify color='yellow' size='20px' strokeWidth='2.5px' />;
-  //   } else {
-  //     return <ChevronsDown color='blue' size='20px' strokeWidth='2.5px' />;
-  //   }
-  // };
   return (
     <>
       <div
@@ -77,7 +64,6 @@ const Card = ({ boardId, id, card, removeCard, dragEntered, dragEnded }) => {
               ) : (
                 <ChevronsDown color='blue' size='20px' strokeWidth='2.5px' />
               )}
-              {/* <ChevronUp color='red' size='20px' strokeWidth='2.5px' /> */}
             </div>
             <div className='assignee'>{nameAcronym}</div>
           </div>
