@@ -5,14 +5,22 @@ import Card from "../Cards/Card";
 import { useState } from "react";
 import Dropdown from "../Dropdown/Dropdown";
 
-const KanbanColumns = ({ id, board }) => {
+const KanbanColumns = ({
+  id,
+  board,
+  removeBoard,
+  removeCard,
+  dragEntered,
+  dragEnded,
+}) => {
   const [showDropdown, setShowDropdown] = useState(false);
   console.log("hello", showDropdown);
   return (
     <div className='wrapper'>
       <div className='board_title'>
         <div className='board_header'>
-          {board.title} <span className='number_of_cards'> 2</span>
+          {board.title}{" "}
+          <span className='number_of_cards'> {board.cards.length}</span>
         </div>
         <div
           className='board_header_title_more'
@@ -27,7 +35,7 @@ const KanbanColumns = ({ id, board }) => {
               class='board_dropdown'
               onClose={() => setShowDropdown(false)}
             >
-              <p>Delete Column</p>
+              <p onClick={() => removeBoard()}>Delete Column</p>
               <p>Add New Card</p>
             </Dropdown>
           )}
@@ -35,7 +43,14 @@ const KanbanColumns = ({ id, board }) => {
       </div>
       <div className='card-container'>
         {board?.cards?.map((card) => (
-          <Card id={card.id} card={card} />
+          <Card
+            boardId={id}
+            id={card.id}
+            card={card}
+            removeCard={removeCard}
+            dragEnded={dragEnded}
+            dragEntered={dragEntered}
+          />
         ))}
       </div>
     </div>
