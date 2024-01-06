@@ -17,4 +17,9 @@ This project has been made using React.js and vanilla CSS
 5. Start the development server
    npm start
 
+## Features
+Drag and drop of cards from one column to another
+Add / Delete columns
+Delete Cards
+
 ### [Github repo](https://github.com/srishtigautam21/kanban-board).
