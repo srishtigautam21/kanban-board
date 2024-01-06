@@ -23,4 +23,5 @@ This project has been made using React.js and vanilla CSS
 2. Add / Delete columns
 3. Delete Cards
 
-### [Github repo](https://github.com/srishtigautam21/kanban-board).
+### [Live link](https://kanban-boarrd.netlify.app/)
+### [Github repo](https://github.com/srishtigautam21/kanban-board)
