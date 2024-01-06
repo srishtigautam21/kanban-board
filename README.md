@@ -18,8 +18,9 @@ This project has been made using React.js and vanilla CSS
    npm start
 
 ## Features
-Drag and drop of cards from one column to another
-Add / Delete columns
-Delete Cards
+
+1. Drag and drop of cards from one column to another
+2. Add / Delete columns
+3. Delete Cards
 
 ### [Github repo](https://github.com/srishtigautam21/kanban-board).
