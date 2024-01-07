@@ -4,24 +4,30 @@ import { KanbanColumns } from "./component/KanbanBoard/KanbanColumns";
 import { boardData } from "./data/boardData";
 import Modal from "./component/Modal/Modal";
 import { X } from "react-feather";
+import { useDispatch, useSelector } from "react-redux";
+import { setBoards } from "./redux/reduxSlice";
 
 function App() {
-  const [boards, setBoards] = useState(
-    JSON.parse(localStorage.getItem("kanban")) || []
-  );
+  const { boards } = useSelector((state) => state.kanban);
+  console.log(boards);
+  const dispatch = useDispatch();
+  // const [boards, setBoards] = useState(
+  //   JSON.parse(localStorage.getItem("kanban")) || boardData
+  // );
   const [targetCard, setTargetCard] = useState({
     boardId: "",
     cardId: "",
   });
   const [showModal, setShowModal] = useState(false);
   const [inputText, setInputText] = useState("");
+
   const removeBoard = (id) => {
     const index = boards.findIndex((item) => item.id === id);
     if (index < 0) return;
 
     const tempBoards = [...boards];
     tempBoards.splice(index, 1);
-    setBoards(tempBoards);
+    dispatch(setBoards(tempBoards));
   };
 
   const removeCard = (boardId, cardId) => {
@@ -29,13 +35,15 @@ function App() {
     if (index < 0) return;
 
     const tempBoards = [...boards];
-    const cards = tempBoards[index].cards;
+    let cards = tempBoards[index].cards;
+    console.log(cards);
 
     const cardIndex = cards.findIndex((item) => item.id === cardId);
     if (cardIndex < 0) return;
+    console.log(cardIndex);
 
     cards.splice(cardIndex, 1);
-    setBoards(tempBoards);
+    dispatch(setBoards(tempBoards));
   };
 
   const dragEnded = (bid, cid) => {
@@ -60,7 +68,7 @@ function App() {
     const sourceCard = tempBoards[s_boardIndex].cards[s_cardIndex];
     tempBoards[s_boardIndex].cards.splice(s_cardIndex, 1);
     tempBoards[t_boardIndex].cards.splice(t_cardIndex, 0, sourceCard);
-    setBoards(tempBoards);
+    dispatch(setBoards(tempBoards));
 
     setTargetCard({
       bid: "",
@@ -82,7 +90,7 @@ function App() {
       title: name,
       cards: [],
     });
-    setBoards(tempBoards);
+    dispatch(setBoards(tempBoards));
   };
 
   useEffect(() => {
@@ -101,9 +109,11 @@ function App() {
         <div className='boards'>
           {boards?.map((board) => (
             <KanbanColumns
+              key={board.id}
               id={board.id}
               board={board}
-              removeBoard={() => removeBoard(board.id)}
+              // removeBoard={() => removeBoard(board.id)}
+              removeBoard={removeBoard}
               removeCard={removeCard}
               dragEntered={dragEntered}
               dragEnded={dragEnded}

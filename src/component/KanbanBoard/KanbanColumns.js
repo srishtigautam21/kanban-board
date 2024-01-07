@@ -13,6 +13,7 @@ const KanbanColumns = ({
   dragEntered,
   dragEnded,
 }) => {
+  // console.log(board, board.cards);
   const [showDropdown, setShowDropdown] = useState(false);
 
   return (
@@ -35,7 +36,7 @@ const KanbanColumns = ({
               class='board_dropdown'
               onClose={() => setShowDropdown(false)}
             >
-              <p onClick={() => removeBoard()}>Delete Column</p>
+              <p onClick={() => removeBoard(id)}>Delete Column</p>
               <p>Add New Card</p>
             </Dropdown>
           )}
@@ -44,6 +45,7 @@ const KanbanColumns = ({
       <div className='card-container'>
         {board?.cards?.map((card) => (
           <Card
+            key={card.id}
             boardId={id}
             id={card.id}
             card={card}
