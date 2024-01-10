@@ -44,6 +44,7 @@ const KanbanColumns = ({
       <div className='card-container'>
         {board?.cards?.map((card) => (
           <Card
+            key={card.id}
             boardId={id}
             id={card.id}
             card={card}

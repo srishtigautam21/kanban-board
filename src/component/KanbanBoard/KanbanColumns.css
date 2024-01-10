@@ -40,3 +40,6 @@
 .board_dropdown p:hover {
   background-color: lightgray;
 }
+.number_of_cards {
+  margin-left: 10px;
+}

@@ -2,13 +2,14 @@ import { useState, useEffect } from "react";
 import "./App.css";
 import { KanbanColumns } from "./component/KanbanBoard/KanbanColumns";
 import { boardData } from "./data/boardData";
-import Modal from "./component/Modal/Modal";
+
 import { X } from "react-feather";
 
 function App() {
   const [boards, setBoards] = useState(
-    JSON.parse(localStorage.getItem("kanban")) || []
+    JSON.parse(localStorage.getItem("kanban")) || boardData
   );
+  console.log(boards);
   const [targetCard, setTargetCard] = useState({
     boardId: "",
     cardId: "",
@@ -101,6 +102,7 @@ function App() {
         <div className='boards'>
           {boards?.map((board) => (
             <KanbanColumns
+              key={board.id}
               id={board.id}
               board={board}
               removeBoard={() => removeBoard(board.id)}
@@ -111,30 +113,34 @@ function App() {
           ))}
         </div>
         {showModal && (
-          <Modal>
-            <div className='modal-header'>Add new Coloumn</div>
-            <div className='modal-cross' onClick={() => setShowModal(false)}>
-              <X />
+          // <Modal>
+          <div className='modal'>
+            <div className='modal_content'>
+              <div className='modal-header'>Add new Coloumn</div>
+              <div className='modal-cross' onClick={() => setShowModal(false)}>
+                <X />
+              </div>
+              <div className='innercontent'>
+                <input
+                  autoFocus
+                  value={inputText}
+                  onChange={(e) => setInputText(e.target.value)}
+                  placeholder='New Column Title'
+                  className='modal-input'
+                />
+                <button
+                  onClick={() => {
+                    addboardHandler(inputText);
+                    setShowModal(false);
+                  }}
+                  className='modal-btn'
+                >
+                  Add
+                </button>
+              </div>
             </div>
-            <div className='innercontent'>
-              <input
-                autoFocus
-                value={inputText}
-                onChange={(e) => setInputText(e.target.value)}
-                placeholder='New Column Title'
-                className='modal-input'
-              />
-              <button
-                onClick={() => {
-                  addboardHandler(inputText);
-                  setShowModal(false);
-                }}
-                className='modal-btn'
-              >
-                Add
-              </button>
-            </div>
-          </Modal>
+          </div>
+          // </Modal>
         )}
       </div>
     </div>
