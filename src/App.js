@@ -113,7 +113,6 @@ function App() {
           ))}
         </div>
         {showModal && (
-          // <Modal>
           <div className='modal'>
             <div className='modal_content'>
               <div className='modal-header'>Add new Coloumn</div>
@@ -123,6 +122,7 @@ function App() {
               <div className='innercontent'>
                 <input
                   autoFocus
+                  type='text'
                   value={inputText}
                   onChange={(e) => setInputText(e.target.value)}
                   placeholder='New Column Title'
@@ -140,7 +140,6 @@ function App() {
               </div>
             </div>
           </div>
-          // </Modal>
         )}
       </div>
     </div>
