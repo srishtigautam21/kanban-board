@@ -95,6 +95,17 @@ const Modal = ({ openModal, setOpenModal, card, boardId, id }) => {
               className='modal-input'
             />
           </label>
+          <label className='desciption'>
+            Description
+            <textarea
+              value={updateCard.desc}
+              onChange={(e) => {
+                setUpdateCard((prev) => ({ ...prev, desc: e.target.value }));
+              }}
+              className='modal-input'
+            ></textarea>
+          </label>
+
           <button>Save Changes</button>
         </div>
       </div>
