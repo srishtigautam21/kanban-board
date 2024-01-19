@@ -10,7 +10,15 @@ import {
 import Dropdown from "../Dropdown/Dropdown";
 import { Modal } from "../Modal/Modal";
 
-const Card = ({ boardId, id, card, removeCard, dragEntered, dragEnded }) => {
+const Card = ({
+  boardId,
+  id,
+  card,
+  removeCard,
+  dragEntered,
+  dragEnded,
+  handleEditChanges,
+}) => {
   const [showDropdown, setShowDropdown] = useState(false);
   const [openModal, setOpenModal] = useState(false);
 
@@ -77,6 +85,7 @@ const Card = ({ boardId, id, card, removeCard, dragEntered, dragEnded }) => {
         card={card}
         boardId={boardId}
         id={id}
+        handleEditChanges={handleEditChanges}
       ></Modal>
     </>
   );

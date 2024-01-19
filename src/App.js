@@ -16,12 +16,23 @@ function App() {
   });
   const [showModal, setShowModal] = useState(false);
   const [inputText, setInputText] = useState("");
+
   const removeBoard = (id) => {
     const index = boards.findIndex((item) => item.id === id);
     if (index < 0) return;
 
     const tempBoards = [...boards];
     tempBoards.splice(index, 1);
+    setBoards(tempBoards);
+  };
+
+  const handleEditChanges = (boardId, cardId, updateCard) => {
+    let index = boards.findIndex((item) => item.id === boardId);
+    let cardIndex = boards[index].cards.findIndex((item) => item.id === cardId);
+
+    let tempBoards = [...boards];
+
+    tempBoards[index].cards.splice(cardIndex, 1, updateCard);
     setBoards(tempBoards);
   };
 
@@ -109,6 +120,7 @@ function App() {
               removeCard={removeCard}
               dragEntered={dragEntered}
               dragEnded={dragEnded}
+              handleEditChanges={handleEditChanges}
             />
           ))}
         </div>

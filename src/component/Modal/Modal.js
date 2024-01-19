@@ -4,17 +4,25 @@ import "./Modal.css";
 import { X } from "react-feather";
 import { useState } from "react";
 
-const Modal = ({ openModal, setOpenModal, card, boardId, id }) => {
-  const [updateCard, setUpdateCard] = [
-    {
-      title: card.title,
-      type: card.type,
-      effortEstimation: card.effortEstimation,
-      priority: card.priority,
-      assignee: card.assignee,
-      desc: card.desc,
-    },
-  ];
+const Modal = ({
+  openModal,
+  setOpenModal,
+  card,
+  boardId,
+  id,
+  handleEditChanges,
+}) => {
+  const [updateCard, setUpdateCard] = useState({
+    id: id,
+    title: card.title,
+    type: card.type,
+    effortEstimation: card.effortEstimation,
+    priority: card.priority,
+    assignee: card.assignee,
+    desc: card.desc,
+  });
+  const [radio, setRadioBtn] = useState(null);
+
   if (!openModal) return null;
   return Reactdom.createPortal(
     <div className='modal'>
@@ -24,7 +32,7 @@ const Modal = ({ openModal, setOpenModal, card, boardId, id }) => {
           <X />
         </div>
         <div className='innercontent'>
-          <label>
+          <label className='input-wrapper'>
             Title
             <input
               type='text'
@@ -35,7 +43,7 @@ const Modal = ({ openModal, setOpenModal, card, boardId, id }) => {
               className='modal-input'
             />
           </label>
-          <label>
+          <label className='input-wrapper'>
             Type
             <select
               value={updateCard.type}
@@ -44,12 +52,12 @@ const Modal = ({ openModal, setOpenModal, card, boardId, id }) => {
               }
               className='modal-input'
             >
-              <option></option>
+              {/* <option></option> */}
               <option>Feature</option>
               <option>Bug</option>
             </select>
           </label>
-          <label>
+          <label className='input-wrapper'>
             Effort Estimation
             <input
               type='number'
@@ -63,28 +71,31 @@ const Modal = ({ openModal, setOpenModal, card, boardId, id }) => {
               className='modal-input'
             />
           </label>
-          <label style={{ marginBottom: "10px" }}>
+          <label style={{ marginBottom: "10px" }} className='input-wrapper'>
             Priority
             {["P0", "P1", "P2"].map((item) => {
               return (
-                <label className='priority-label-wrapper'>
+                <label key={item} className='priority-label-wrapper'>
                   <input
                     type='radio'
                     value={updateCard.priority}
-                    onChange={(e) =>
+                    onChange={(e) => {
                       setUpdateCard((prev) => ({
                         ...prev,
-                        priority: e.target.value,
-                      }))
+                        priority: item,
+                      }));
+                      setRadioBtn(item);
+                    }}
+                    checked={
+                      radio ? radio === item : updateCard.priority === item
                     }
-                    checked={item === updateCard.priority}
                   />
                   {item}
                 </label>
               );
             })}
           </label>
-          <label>
+          <label className='input-wrapper'>
             Assignee
             <input
               type='text'
@@ -95,7 +106,7 @@ const Modal = ({ openModal, setOpenModal, card, boardId, id }) => {
               className='modal-input'
             />
           </label>
-          <label className='desciption'>
+          <label className='input-wrapper'>
             Description
             <textarea
               value={updateCard.desc}
@@ -106,7 +117,15 @@ const Modal = ({ openModal, setOpenModal, card, boardId, id }) => {
             ></textarea>
           </label>
 
-          <button>Save Changes</button>
+          <button
+            className='modal-btn'
+            onClick={() => {
+              handleEditChanges(boardId, id, updateCard);
+              setOpenModal(false);
+            }}
+          >
+            Save Changes
+          </button>
         </div>
       </div>
     </div>,
