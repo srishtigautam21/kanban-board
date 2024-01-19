@@ -12,6 +12,7 @@ const KanbanColumns = ({
   removeCard,
   dragEntered,
   dragEnded,
+  handleEditChanges,
 }) => {
   const [showDropdown, setShowDropdown] = useState(false);
 
@@ -51,6 +52,7 @@ const KanbanColumns = ({
             removeCard={removeCard}
             dragEnded={dragEnded}
             dragEntered={dragEntered}
+            handleEditChanges={handleEditChanges}
           />
         ))}
       </div>

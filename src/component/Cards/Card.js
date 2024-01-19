@@ -8,9 +8,19 @@ import {
   MoreHorizontal,
 } from "react-feather";
 import Dropdown from "../Dropdown/Dropdown";
+import { Modal } from "../Modal/Modal";
 
-const Card = ({ boardId, id, card, removeCard, dragEntered, dragEnded }) => {
+const Card = ({
+  boardId,
+  id,
+  card,
+  removeCard,
+  dragEntered,
+  dragEnded,
+  handleEditChanges,
+}) => {
   const [showDropdown, setShowDropdown] = useState(false);
+  const [openModal, setOpenModal] = useState(false);
 
   let arr = card.assignee.split(" ");
   let nameAcronym = "";
@@ -39,7 +49,7 @@ const Card = ({ boardId, id, card, removeCard, dragEntered, dragEnded }) => {
                 class='board_dropdown'
                 onClose={() => setShowDropdown(false)}
               >
-                <p>Edit Card</p>
+                <p onClick={() => setOpenModal(true)}>Edit Card</p>
                 <p onClick={() => removeCard(boardId, id)}>Delete Card</p>
               </Dropdown>
             )}
@@ -69,6 +79,14 @@ const Card = ({ boardId, id, card, removeCard, dragEntered, dragEnded }) => {
           </div>
         </div>
       </div>
+      <Modal
+        openModal={openModal}
+        setOpenModal={setOpenModal}
+        card={card}
+        boardId={boardId}
+        id={id}
+        handleEditChanges={handleEditChanges}
+      ></Modal>
     </>
   );
 };
