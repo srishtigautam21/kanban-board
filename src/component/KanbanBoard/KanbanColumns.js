@@ -4,6 +4,7 @@ import { MoreHorizontal } from "react-feather";
 import Card from "../Cards/Card";
 import { useState } from "react";
 import Dropdown from "../Dropdown/Dropdown";
+import { Modal } from "../Modal/Modal";
 
 const KanbanColumns = ({
   id,
@@ -15,6 +16,7 @@ const KanbanColumns = ({
   handleEditChanges,
 }) => {
   const [showDropdown, setShowDropdown] = useState(false);
+  const [Modal,setOpenModal]=useState(false)
 
   return (
     <div className='wrapper'>
@@ -37,7 +39,7 @@ const KanbanColumns = ({
               onClose={() => setShowDropdown(false)}
             >
               <p onClick={() => removeBoard()}>Delete Column</p>
-              <p>Add New Card</p>
+              <p onClick={()=> setOpenModal(true)}>Add New Card</p>
             </Dropdown>
           )}
         </div>
@@ -56,6 +58,7 @@ const KanbanColumns = ({
           />
         ))}
       </div>
+      <Modal />
     </div>
   );
 };
