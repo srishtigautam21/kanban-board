@@ -12,6 +12,7 @@ const Modal = ({
   boardId,
   id,
   handleEditChanges,
+  handleNewCard,
 }) => {
   const [updateCard, setUpdateCard] = useState({
     id: isNewCard === "true" ? "" : id,
@@ -23,12 +24,15 @@ const Modal = ({
     desc: isNewCard === "true" ? "" : card.desc,
   });
   const [radio, setRadioBtn] = useState(null);
+  console.log(updateCard, boardId);
 
   if (!openModal) return null;
   return Reactdom.createPortal(
     <div className='modal'>
       <div className='modal-content'>
-        <div className='modal-header'>Edit Card</div>
+        <div className='modal-header'>
+          {isNewCard === "true" ? "Add new Card" : "Edit Card"}
+        </div>
         <div className='modal-cross' onClick={() => setOpenModal(false)}>
           <X />
         </div>
@@ -37,7 +41,7 @@ const Modal = ({
             Title
             <input
               type='text'
-              value={isNewCard ? "" : updateCard.title}
+              value={updateCard.title}
               onChange={(e) =>
                 setUpdateCard((prev) => ({ ...prev, title: e.target.value }))
               }
@@ -47,7 +51,7 @@ const Modal = ({
           <label className='input-wrapper'>
             Type
             <select
-              value={isNewCard ? "" : updateCard.type}
+              value={updateCard.type}
               onChange={(e) =>
                 setUpdateCard((prev) => ({ ...prev, type: e.target.value }))
               }
@@ -62,7 +66,7 @@ const Modal = ({
             Effort Estimation
             <input
               type='number'
-              value={isNewCard ? "" : updateCard.effortEstimation}
+              value={updateCard.effortEstimation}
               onChange={(e) =>
                 setUpdateCard((prev) => ({
                   ...prev,
@@ -79,7 +83,7 @@ const Modal = ({
                 <label key={item} className='priority-label-wrapper'>
                   <input
                     type='radio'
-                    value={isNewCard ? "" : updateCard.priority}
+                    value={updateCard.priority}
                     onChange={(e) => {
                       setUpdateCard((prev) => ({
                         ...prev,
@@ -100,7 +104,7 @@ const Modal = ({
             Assignee
             <input
               type='text'
-              value={isNewCard ? "" : updateCard.assignee}
+              value={updateCard.assignee}
               onChange={(e) =>
                 setUpdateCard((prev) => ({ ...prev, assignee: e.target.value }))
               }
@@ -110,7 +114,7 @@ const Modal = ({
           <label className='input-wrapper'>
             Description
             <textarea
-              value={isNewCard ? "" : updateCard.desc}
+              value={updateCard.desc}
               onChange={(e) => {
                 setUpdateCard((prev) => ({ ...prev, desc: e.target.value }));
               }}
@@ -121,7 +125,9 @@ const Modal = ({
           <button
             className='modal-btn'
             onClick={() => {
-              handleEditChanges(boardId, id, updateCard);
+              isNewCard === "true"
+                ? handleNewCard(boardId, updateCard)
+                : handleEditChanges(boardId, id, updateCard);
               setOpenModal(false);
             }}
           >

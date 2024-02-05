@@ -14,6 +14,7 @@ const KanbanColumns = ({
   dragEntered,
   dragEnded,
   handleEditChanges,
+  handleNewCard,
 }) => {
   const [showDropdown, setShowDropdown] = useState(false);
   const [modal, setOpenModal] = useState(false);
@@ -63,6 +64,7 @@ const KanbanColumns = ({
         boardId={id}
         openModal={modal}
         setOpenModal={setOpenModal}
+        handleNewCard={handleNewCard}
       />
     </div>
   );

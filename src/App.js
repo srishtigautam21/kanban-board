@@ -97,6 +97,25 @@ function App() {
     setBoards(tempBoards);
   };
 
+  const handleNewCard = (boardId, updateCard) => {
+    console.log(updateCard, boardId);
+    const tempBoards = [...boards];
+    const targetBoardIndex = tempBoards.findIndex(
+      (item) => item.id === boardId
+    );
+    console.log("tra", targetBoardIndex);
+    tempBoards[targetBoardIndex].cards.push({
+      id: Date.now() + Math.random() * 2,
+      title: updateCard.title,
+      type: updateCard.type,
+      effortEstimation: updateCard.effortEstimation,
+      priority: updateCard.priority,
+      assignee: updateCard.assignee,
+      desc: updateCard.desc,
+    });
+    setBoards(tempBoards);
+  };
+
   useEffect(() => {
     localStorage.setItem("kanban", JSON.stringify(boardData));
   }, [boards]);
@@ -121,6 +140,7 @@ function App() {
               dragEntered={dragEntered}
               dragEnded={dragEnded}
               handleEditChanges={handleEditChanges}
+              handleNewCard={handleNewCard}
             />
           ))}
         </div>
@@ -138,7 +158,7 @@ function App() {
                   value={inputText}
                   onChange={(e) => setInputText(e.target.value)}
                   placeholder='New Column Title'
-                  className='modal-input'
+                  className='modal-input-for-board'
                 />
                 <button
                   onClick={() => {
