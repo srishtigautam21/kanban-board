@@ -80,6 +80,7 @@ const Card = ({
         </div>
       </div>
       <Modal
+        isNewCard={"false"}
         openModal={openModal}
         setOpenModal={setOpenModal}
         card={card}

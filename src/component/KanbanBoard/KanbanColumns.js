@@ -16,7 +16,7 @@ const KanbanColumns = ({
   handleEditChanges,
 }) => {
   const [showDropdown, setShowDropdown] = useState(false);
-  const [Modal,setOpenModal]=useState(false)
+  const [modal, setOpenModal] = useState(false);
 
   return (
     <div className='wrapper'>
@@ -39,7 +39,7 @@ const KanbanColumns = ({
               onClose={() => setShowDropdown(false)}
             >
               <p onClick={() => removeBoard()}>Delete Column</p>
-              <p onClick={()=> setOpenModal(true)}>Add New Card</p>
+              <p onClick={() => setOpenModal(true)}>Add New Card</p>
             </Dropdown>
           )}
         </div>
@@ -58,7 +58,12 @@ const KanbanColumns = ({
           />
         ))}
       </div>
-      <Modal />
+      <Modal
+        isNewCard={"true"}
+        boardId={id}
+        openModal={modal}
+        setOpenModal={setOpenModal}
+      />
     </div>
   );
 };

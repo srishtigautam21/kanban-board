@@ -5,6 +5,7 @@ import { X } from "react-feather";
 import { useState } from "react";
 
 const Modal = ({
+  isNewCard,
   openModal,
   setOpenModal,
   card,
@@ -13,13 +14,13 @@ const Modal = ({
   handleEditChanges,
 }) => {
   const [updateCard, setUpdateCard] = useState({
-    id: id,
-    title: card.title,
-    type: card.type,
-    effortEstimation: card.effortEstimation,
-    priority: card.priority,
-    assignee: card.assignee,
-    desc: card.desc,
+    id: isNewCard === "true" ? "" : id,
+    title: isNewCard === "true" ? "" : card.title,
+    type: isNewCard === "true" ? "" : card.type,
+    effortEstimation: isNewCard === "true" ? "" : card.effortEstimation,
+    priority: isNewCard === "true" ? "" : card.priority,
+    assignee: isNewCard === "true" ? "" : card.assignee,
+    desc: isNewCard === "true" ? "" : card.desc,
   });
   const [radio, setRadioBtn] = useState(null);
 
@@ -36,7 +37,7 @@ const Modal = ({
             Title
             <input
               type='text'
-              value={updateCard.title}
+              value={isNewCard ? "" : updateCard.title}
               onChange={(e) =>
                 setUpdateCard((prev) => ({ ...prev, title: e.target.value }))
               }
@@ -46,7 +47,7 @@ const Modal = ({
           <label className='input-wrapper'>
             Type
             <select
-              value={updateCard.type}
+              value={isNewCard ? "" : updateCard.type}
               onChange={(e) =>
                 setUpdateCard((prev) => ({ ...prev, type: e.target.value }))
               }
@@ -61,7 +62,7 @@ const Modal = ({
             Effort Estimation
             <input
               type='number'
-              value={updateCard.effortEstimation}
+              value={isNewCard ? "" : updateCard.effortEstimation}
               onChange={(e) =>
                 setUpdateCard((prev) => ({
                   ...prev,
@@ -78,7 +79,7 @@ const Modal = ({
                 <label key={item} className='priority-label-wrapper'>
                   <input
                     type='radio'
-                    value={updateCard.priority}
+                    value={isNewCard ? "" : updateCard.priority}
                     onChange={(e) => {
                       setUpdateCard((prev) => ({
                         ...prev,
@@ -99,7 +100,7 @@ const Modal = ({
             Assignee
             <input
               type='text'
-              value={updateCard.assignee}
+              value={isNewCard ? "" : updateCard.assignee}
               onChange={(e) =>
                 setUpdateCard((prev) => ({ ...prev, assignee: e.target.value }))
               }
@@ -109,7 +110,7 @@ const Modal = ({
           <label className='input-wrapper'>
             Description
             <textarea
-              value={updateCard.desc}
+              value={isNewCard ? "" : updateCard.desc}
               onChange={(e) => {
                 setUpdateCard((prev) => ({ ...prev, desc: e.target.value }));
               }}
